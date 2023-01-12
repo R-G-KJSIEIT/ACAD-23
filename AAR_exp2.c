@@ -1,12 +1,11 @@
 #include <stdio.h>
-
 int main()
 {
     int ar[100],n,i,j,tmp;
     printf("Enter the number of elements in array:\t");
     scanf("%d",&n);
     printf("Enter the array elements:\t");
-    for (i=1;i<=n;i++)
+    for (i=0;i<n;i++)
     {
         scanf("%d",&ar[i]);
     }
