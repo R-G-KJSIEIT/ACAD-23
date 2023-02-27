@@ -1,6 +1,7 @@
 #include<stdio.h>
 
 int main() {
+    printf("This program has been executed by Rishikesh Giridhar");
     int num_processes, i, j, time_quantum;
     float avg_waiting_time = 0, avg_turnaround_time = 0;
     
