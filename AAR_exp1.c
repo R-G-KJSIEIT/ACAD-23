@@ -1,33 +1,27 @@
 // Name  : Rishikesh Giridhar 
 //roll no: 13
 #include <stdio.h>
-void main()
-{
-	int i, j, a, n, number[30];
-	printf("Enter the number of Elements: \n");
-	scanf("%d", &n);
-	printf("Enter the numbers: \n");
-	for (i = 0; i < n; ++i)
-	{
-		scanf("%d", &number[i]);
-	}
-	for (i = 0; i < n; ++i) 
-	{
-		for (j = i + 1; j < n; ++j)
-		{
-			if (number[i] > number[j]) 
-			{
-				a =  number[i];
-				number[i] = number[j];
-				number[j] = a;
-			}
-		}
-	}
-	printf("The numbers arranged in ascending order are given below \n");
-	for (i = 0; i < n; ++i)
-	{
-		printf("%d\n", number[i]);
-	}
+
+void selection_sort(int arr[], int n) {
+    int i, j, min_idx;
+    for (i = 0; i < n-1; i++) {
+        min_idx = i;
+        for (j = i+1; j < n; j++)
+            if (arr[j] < arr[min_idx])
+                min_idx = j;
+        int temp = arr[min_idx];
+        arr[min_idx] = arr[i];
+        arr[i] = temp;
+    }
 }
 
-//learn to slap your child before the child slaps the world
+int main() {
+    int arr[] = {64, 25, 12, 22, 11};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    selection_sort(arr, n);
+    printf("Sorted array: \n");
+    for (int i=0; i < n; i++)
+        printf("%d ", arr[i]);
+    printf("\n");
+    return 0;
+}
