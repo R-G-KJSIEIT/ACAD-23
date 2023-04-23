@@ -1,52 +1,44 @@
 #include <stdio.h>
-#include <windows.h>
 
-void quick_sort(int[],int,int); 
-int partition(int[],int,int);
-int main() 
-{ 
-    int a[50],n,i; 
-    printf("How many elements?"); 
-    scanf("%d",&n); 
-    printf("\nEnter array elements:"); 
-    for(i=0;i<n;i++) 
-    scanf("%d",&a[i]); 
-    quick_sort(a,0,n-1); 
-    printf("\nArray after sorting:"); 
-    for(i=0;i<n;i++) 
-    printf("%d ",a[i]); 
-    return 0; 
-} 
-void quick_sort(int a[],int l,int u) 
-{ 
-    int j; 
-    if(l<u) 
-    { 
-    j=partition(a,l,u); 
-    quick_sort(a,l,j-1); 
-    quick_sort(a,j+1,u); 
-    } } 
-int partition(int a[],int l,int u) 
-{ 
-    int v,i,j,temp; 
-    v=a[l]; 
-    i=l; 
-    j=u+1; 
-    do 
-    { 
-        do 
-            i++; 
-        while(a[i]<v&&i<=u); 
-        do 
-            j--; 
-        while(v<a[j]); 
-        if(i<j) 
-        { 
-            temp=a[i]; 
-            a[i]=a[j]; 
-            a[j]=temp; 
-        } 
-    }while(i<j);
-    a[j]=v; 
-    return(j); 
-} 
+void quick_sort(int arr[], int left, int right) {
+    if (left >= right) return;
+
+    int pivot = arr[(left + right) / 2];
+    int i = left, j = right;
+
+    while (i <= j) {
+        while (arr[i] < pivot) i++;
+        while (arr[j] > pivot) j--;
+        if (i <= j) {
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+            i++;
+            j--;
+        }
+    }
+
+    quick_sort(arr, left, j);
+    quick_sort(arr, i, right);
+}
+
+int main() {
+    int arr[] = {10, 80, 30, 90, 40, 50, 70};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    printf("Original array: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+
+    quick_sort(arr, 0, n - 1);
+
+    printf("Sorted array: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
