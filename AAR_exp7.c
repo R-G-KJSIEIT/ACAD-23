@@ -1,137 +1,37 @@
 #include <stdio.h>
-int matrix[25][25], visited_cities[10], limit, cost = 0;
+#include <stdlib.h>
+#include <limits.h>
 
-int
-tsp (int c) 
-{
-  
-int count, nearest_city = 999;
-  
-int minimum = 999, temp;
-  
-for (count = 0; count < limit; count++)
-    
-    {
-      
-if ((matrix[c][count] != 0) && (visited_cities[count] == 0))
-	
-	{
-	  
-if (matrix[c][count] < minimum)
-	    
-	    {
-	      
-minimum = matrix[count][0] + matrix[c][count];
-	    
-}
-	  
-temp = matrix[c][count];
-	  
-nearest_city = count;
-	
-}
+#define V 4
+
+int graph[V][V] = {
+    { 0, 10, 15, 20 },
+    { 10, 0, 35, 25 },
+    { 15, 35, 0, 30 },
+    { 20, 25, 30, 0 }
+};
+
+int visited[V], min_cost = INT_MAX;
+
+void tsp(int curr_city, int count, int cost) {
+    if (count == V && graph[curr_city][0]) {
+        cost += graph[curr_city][0];
+        if (cost < min_cost)
+            min_cost = cost;
+        return;
     }
-  
-if (minimum != 999)
-    
-    {
-      
-cost = cost + temp;
-    
-}
-  
-return nearest_city;
-
+    for (int i = 0; i < V; i++) {
+        if (!visited[i] && graph[curr_city][i]) {
+            visited[i] = 1;
+            tsp(i, count+1, cost+graph[curr_city][i]);
+            visited[i] = 0;
+        }
+    }
 }
 
-
-void
-minimum_cost (int city) 
-{
-  
-int nearest_city;
-  
-visited_cities[city] = 1;
-  
-printf ("%d ", city + 1);
-  
-nearest_city = tsp (city);
-  
-if (nearest_city == 999)
-    
-    {
-      
-nearest_city = 0;
-      
-printf ("%d", nearest_city + 1);
-      
-cost = cost + matrix[city][nearest_city];
-      
-return;
-    
-}
-  
-minimum_cost (nearest_city);
-
-}
-
-
-int
-main () 
-{
-  
-int i, j;
-  
-printf ("Enter Total Number of Cities:\t");
-  
-scanf ("%d", &limit);
-  
-printf ("\nEnter Cost Matrix\n");
-  
-for (i = 0; i < limit; i++)
-    
-    {
-      
-printf ("\nEnter %d Elements in Row[%d]\n", limit, i + 1);
-      
-for (j = 0; j < limit; j++)
-	
-	{
-	  
-scanf ("%d", &matrix[i][j]);
-	
-}
-      
-visited_cities[i] = 0;
-    
-}
-  
-printf ("\nEntered Cost Matrix\n");
-  
-for (i = 0; i < limit; i++)
-    
-    {
-      
-printf ("\n");
-      
-for (j = 0; j < limit; j++)
-	
-	{
-	  
-printf ("%d ", matrix[i][j]);
-	
-}
-    
-}
-  
-printf ("\n\nPath:\t");
-  
-minimum_cost (0);
-  
-printf ("\n\nMinimum Cost: \t");
-  
-printf ("%d\n", cost);
-  
-return 0;
-
+int main() {
+    visited[0] = 1;
+    tsp(0, 1, 0);
+    printf("Minimum cost: %d\n", min_cost);
+    return 0;
 }
