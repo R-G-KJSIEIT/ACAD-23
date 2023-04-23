@@ -1,52 +1,27 @@
-#include <stdio.h>
-#include <windows.h>
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
 
-void quick_sort(int[],int,int); 
-int partition(int[],int,int);
-int main() 
-{ 
-    int a[50],n,i; 
-    printf("How many elements?"); 
-    scanf("%d",&n); 
-    printf("\nEnter array elements:"); 
-    for(i=0;i<n;i++) 
-    scanf("%d",&a[i]); 
-    quick_sort(a,0,n-1); 
-    printf("\nArray after sorting:"); 
-    for(i=0;i<n;i++) 
-    printf("%d ",a[i]); 
-    return 0; 
-} 
-void quick_sort(int a[],int l,int u) 
-{ 
-    int j; 
-    if(l<u) 
-    { 
-    j=partition(a,l,u); 
-    quick_sort(a,l,j-1); 
-    quick_sort(a,j+1,u); 
-    } } 
-int partition(int a[],int l,int u) 
-{ 
-    int v,i,j,temp; 
-    v=a[l]; 
-    i=l; 
-    j=u+1; 
-    do 
-    { 
-        do 
-            i++; 
-        while(a[i]<v&&i<=u); 
-        do 
-            j--; 
-        while(v<a[j]); 
-        if(i<j) 
-        { 
-            temp=a[i]; 
-            a[i]=a[j]; 
-            a[j]=temp; 
-        } 
-    }while(i<j);
-    a[j]=v; 
-    return(j); 
-} 
+int main()
+{
+	int i,j,key;
+	printf("yes yes yes\n");
+	int arr[] = {24,23,25,27,26};
+	int n  = sizeof(arr)/sizeof(arr[0]);
+	for (i=1;i<n;i++)
+	{
+		key=arr[i];
+		j=i-1;
+		while (j>=0 && arr[j]>key) 
+		{
+			arr[j+1] = arr[j];
+			j = j-1;
+		}
+		arr[j+1]=key;
+	}
+	for (i=0;i<n;i++)
+	{
+		printf("%d\t",arr[i]);
+	}
+	return 0;
+}
