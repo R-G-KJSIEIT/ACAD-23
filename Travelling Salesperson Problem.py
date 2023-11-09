@@ -1,4 +1,4 @@
-	class TSP:
+class TSP:
     def __init__(self):
         self.INF = 1000
         self.n = int(input("Enter the number of nodes: "))

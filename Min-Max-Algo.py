@@ -30,3 +30,11 @@ def main():
     max_val = max_value(min_values, n)
     print("The Max Value is", max_val)
 main()
+
+"""Enter the no. of nodes in each subtree: 3
+Enter the utility values:
+2 1 3
+3 -2 4
+0 1 2
+The min values returned are:  1  -2  0
+The Max Value is 1"""
